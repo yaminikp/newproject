@@ -21,6 +21,12 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <!-- No blank lines preceding a closing brace. -->
+    <module name="RegexpMultiline">
+        <property name="format" value="^\s*\n\s*[}]"/>
+        <property name="message" value="Remove trailing empty lines before close of block."/>
+    </module>
+
     <module name="TreeWalker">
 
         <module name="OneTopLevelClass"/>
