@@ -1,17 +1,21 @@
 package com.us.itp.odl.model;
 
+import javax.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.NonNull;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@Entity
 @ToString(exclude = "password")
-public final class Customer implements User {
-
-    @NonNull private String username;
+public final class Customer extends User {
 
     @Getter(AccessLevel.NONE)
     @NonNull private String password;
@@ -42,7 +46,7 @@ public final class Customer implements User {
             @NonNull final String phoneNumber,
             @NonNull final String aadhaarCardNumber
     ) {
-        this.username = username;
+        super(username);
         this.password = password;
         setRealName(firstName, middleName, lastName);
         this.address = address;

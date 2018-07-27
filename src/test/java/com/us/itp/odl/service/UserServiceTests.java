@@ -2,18 +2,18 @@ package com.us.itp.odl.service;
 
 import static org.junit.Assert.assertEquals;
 
-import com.us.itp.odl.dto.CustomerDto;
+import com.us.itp.odl.dao.MockUserRepository;
 import com.us.itp.odl.model.Customer;
 import org.junit.Test;
 import org.springframework.lang.NonNull;
 
-public class UserServiceTests {
+public final class UserServiceTests {
 
-    @NonNull private final UserService service = new UserServiceImpl();
+    @NonNull private final UserService service = new UserServiceImpl(new MockUserRepository());
 
     @Test
     public void createdCustomerIsPersisted() {
-        final CustomerDto customer = new CustomerDto(
+        final Customer customer = new Customer(
                 /* username = */ "alice",
                 /* password = */ "myPassword",
                 /* realName = */ "Alice", "Mary", "Smith",

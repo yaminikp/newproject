@@ -1,13 +1,10 @@
 package com.us.itp.odl.service;
 
+import com.us.itp.odl.dao.UserRepository;
 import com.us.itp.odl.dto.CustomerDto;
 import com.us.itp.odl.model.Customer;
 import com.us.itp.odl.model.User;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -15,16 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UserServiceImpl implements UserService {
 
-    @NonNull private final Map<String, User> db = new HashMap<>();
+    @NonNull private UserRepository db;
+
+    @Autowired
+    UserServiceImpl(UserRepository db) {
+        this.db = db;
+    }
 
     @Override
     @Nullable public User lookupUser(@NonNull final String username) {
-        return db.get(username);
+        return db.getByUsername(username);
     }
 
     @Override
     public void createUser(@NonNull final User user) {
-        db.put(user.getUsername(), user);
+        db.save(user);
     }
 
     @Override
