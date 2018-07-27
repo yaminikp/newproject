@@ -1,0 +1,23 @@
+package com.us.itp.odl.dto;
+
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public final class CustomerDto implements Serializable {
+
+    @NonNull private String username;
+    @NonNull private String password;
+    @NonNull private String firstName;
+    @NonNull private String middleName;
+    @NonNull private String lastName;
+    @NonNull private String address;
+    @NonNull private String email;
+    @NonNull private String phoneNumber;
+    @NonNull private String aadhaarCardNumber;
+}

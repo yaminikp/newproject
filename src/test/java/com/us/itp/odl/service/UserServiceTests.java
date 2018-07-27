@@ -2,6 +2,7 @@ package com.us.itp.odl.service;
 
 import static org.junit.Assert.assertEquals;
 
+import com.us.itp.odl.dto.CustomerDto;
 import com.us.itp.odl.model.Customer;
 import org.junit.Test;
 import org.springframework.lang.NonNull;
@@ -12,7 +13,7 @@ public class UserServiceTests {
 
     @Test
     public void createdCustomerIsPersisted() {
-        final Customer customer = new Customer(
+        final CustomerDto customer = new CustomerDto(
                 /* username = */ "alice",
                 /* password = */ "myPassword",
                 /* realName = */ "Alice", "Mary", "Smith",
