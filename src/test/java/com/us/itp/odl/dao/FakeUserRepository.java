@@ -24,7 +24,7 @@ import org.springframework.lang.Nullable;
  */
 @NoRepositoryBean
 @SuppressWarnings("SpringDataMethodInconsistencyInspection")
-public final class MockUserRepository implements UserRepository {
+public final class FakeUserRepository implements UserRepository {
 
     @NonNull private final Map<Long, User> db = new HashMap<>();
 
@@ -154,7 +154,7 @@ public final class MockUserRepository implements UserRepository {
     // Always throws; returns a generic type as proxy for a proper bottom type.
     private <T> T stub(@NonNull final String methodName) {
         throw new UnsupportedOperationException(
-                "MockUserRepository does not implement " + methodName + " method"
+                "FakeUserRepository does not implement " + methodName + " method"
         );
     }
 
