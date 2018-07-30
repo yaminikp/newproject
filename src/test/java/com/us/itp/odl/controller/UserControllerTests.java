@@ -31,7 +31,7 @@ public final class UserControllerTests {
 
     @Test
     public void canCreateUser() throws Exception {
-        CustomerDto user = new CustomerDto(
+        CustomerDto dto = new CustomerDto(
                 /* username = */ "alice",
                 /* password = */ "myPassword",
                 /* realName = */ "Alice", "Mary", "Smith",
@@ -42,8 +42,8 @@ public final class UserControllerTests {
         );
         mockMvc.perform(post("/customer")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(user)))
+                .content(jsonMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated());
-        verify(userService, times(1)).createUser(user);
+        verify(userService, times(1)).createUser(dto.toCustomer());
     }
 }

@@ -1,5 +1,6 @@
 package com.us.itp.odl.dto;
 
+import com.us.itp.odl.model.Customer;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,18 @@ public final class CustomerDto implements Serializable {
     @NonNull private String email;
     @NonNull private String phoneNumber;
     @NonNull private String aadhaarCardNumber;
+
+    @NonNull public Customer toCustomer() {
+        return new Customer(
+                /* username = */ username,
+                /* password = */ password,
+                /* firstName = */ firstName,
+                /* middleName = */ middleName,
+                /* lastName = */ lastName,
+                /* address = */ address,
+                /* email = */ email,
+                /* phoneNumber = */ phoneNumber,
+                /* aadhaarCardNumber = */ aadhaarCardNumber
+        );
+    }
 }
