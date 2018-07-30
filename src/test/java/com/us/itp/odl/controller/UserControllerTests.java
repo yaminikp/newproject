@@ -2,6 +2,7 @@ package com.us.itp.odl.controller;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,7 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 public final class UserControllerTests {
 
-    @Autowired @NonNull private MockMvc mockMvc;
+    @Autowired @NonNull private MockMvc mvc;
     @Autowired @NonNull private ObjectMapper jsonMapper;
 
     @MockBean private UserService userService;
@@ -40,10 +41,11 @@ public final class UserControllerTests {
                 /* phoneNumber = */ "555-555-5555",
                 /* aadhaarCardNumber = */ "1234 5678 9012"
         );
-        mockMvc.perform(post("/customer")
+        mvc.perform(post("/customer")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(dto)))
-                .andExpect(status().isCreated());
+                .content(jsonMapper.writeValueAsString(dto))
+                .with(csrf())
+        ).andExpect(status().isCreated());
         verify(userService, times(1)).createUser(dto.toCustomer());
     }
 }

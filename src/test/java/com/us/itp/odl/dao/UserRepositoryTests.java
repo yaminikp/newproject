@@ -3,11 +3,8 @@ package com.us.itp.odl.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import com.us.itp.odl.model.TestUser;
 import com.us.itp.odl.model.User;
-import javax.persistence.Entity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -27,17 +24,6 @@ public class UserRepositoryTests {
     @Rule public ExpectedException expected = ExpectedException.none();
 
     @Autowired @NonNull UserRepository repo;
-
-    @Data
-    @EqualsAndHashCode(callSuper = false)
-    @NoArgsConstructor
-    @Entity
-    private static final class TestUser extends User {
-
-        TestUser(@NonNull final String username) {
-            super(username);
-        }
-    }
 
     @Test
     public void repoIsInitiallyEmpty() {

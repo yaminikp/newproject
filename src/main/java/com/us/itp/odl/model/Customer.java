@@ -4,21 +4,15 @@ import javax.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.lang.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
-@ToString(exclude = "password")
 public final class Customer extends User {
-
-    @Getter(AccessLevel.NONE)
-    @NonNull private String password;
 
     @Setter(AccessLevel.PACKAGE)
     @NonNull private Name realName;
@@ -46,8 +40,7 @@ public final class Customer extends User {
             @NonNull final String phoneNumber,
             @NonNull final String aadhaarCardNumber
     ) {
-        super(username);
-        this.password = password;
+        super(username, password);
         setRealName(firstName, middleName, lastName);
         this.address = address;
         this.email = email;
