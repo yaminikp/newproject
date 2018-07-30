@@ -21,6 +21,11 @@
         <property name="eachLine" value="true"/>
     </module>
 
+    <!-- All files should end with a newline. -->
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="lf"/>
+    </module>
+
     <!-- No blank lines preceding a closing brace. -->
     <module name="RegexpMultiline">
         <property name="format" value="^\s*\n\s*[}]"/>
@@ -147,9 +152,15 @@
         <!-- Disallow more than one consecutive empty line everywhere -->
         <!-- The part of this check that requires empty lines is disabled; see suppression file. -->
         <module name="EmptyLineSeparator">
+            <property name="id" value="GeneralEmptyLineSeparator"/>
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
             <property name="allowMultipleEmptyLines" value="false"/>
             <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
+        </module>
+        <module name="EmptyLineSeparator">
+            <property name="id" value="PackageImportEmptyLineSeparator"/>
+            <property name="tokens" value="PACKAGE_DEF, IMPORT"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
         </module>
 
         <module name="SeparatorWrap">

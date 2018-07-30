@@ -8,5 +8,6 @@
     <!-- Allow multiple consecutive declarations without empty lines between. -->
     <!-- Ideally, we would restrict this to single-line declarations, but how is not clear. -->
     <suppress checks="EmptyLineSeparatorCheck"
-        message="should be separated from previous statement."/>
+              id="GeneralEmptyLineSeparator"
+              message="should be separated from previous statement."/>
 </suppressions>
