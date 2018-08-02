@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import com.us.itp.odl.dao.FakeUserRepository;
 import com.us.itp.odl.model.Customer;
+import java.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,7 +24,14 @@ public final class UserServiceTests {
                 /* username = */ "alice",
                 /* password = */ "myPassword",
                 /* realName = */ "Alice", "Mary", "Smith",
-                /* address = */ "123 Main Street",
+                /* gender = */ "female",
+                /* dateOfBirth = */ LocalDate.of(2018,10,25),
+                /* address1 = */ "123 Main Street",
+                /* address2 = */ "apt 318",
+                /* city = */ "Woodbury",
+                /* pinCode */ "55125",
+                /* state = */ "MN",
+                /* country = */ "USA",
                 /* email = */ "alice@example.com",
                 /* phoneNumber = */ "555-555-5555",
                 /* aadhaarCardNumber = */ "1234 5678 9012"
