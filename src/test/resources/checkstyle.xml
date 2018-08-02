@@ -133,6 +133,8 @@
             <property name="allowLineBreaks" value="true"/>
         </module>
 
+        <module name="WhitespaceAfter"/>
+
         <module name="OneStatementPerLine"/>
         <module name="MultipleVariableDeclarations"/>
 
