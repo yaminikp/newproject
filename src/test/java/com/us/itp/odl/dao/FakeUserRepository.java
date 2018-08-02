@@ -23,7 +23,6 @@ import org.springframework.lang.Nullable;
  * Actual implementations will be substituted as required by tests.
  */
 @NoRepositoryBean
-@SuppressWarnings("SpringDataMethodInconsistencyInspection")
 public final class FakeUserRepository implements UserRepository {
 
     @NonNull private final Map<Long, User> db = new HashMap<>();
@@ -82,7 +81,7 @@ public final class FakeUserRepository implements UserRepository {
 
     @Override
     public long count() {
-        return stub("count");
+        return db.size();
     }
 
     @Override
@@ -112,7 +111,7 @@ public final class FakeUserRepository implements UserRepository {
 
     @Override
     public void deleteAll() {
-        stub("deleteAll()");
+        db.clear();
     }
 
     @Override

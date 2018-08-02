@@ -62,6 +62,7 @@
         </module>
 
         <module name="Indentation">
+            <property name="lineWrappingIndentation" value="8"/>
             <property name="throwsIndent" value="0"/>
         </module>
 

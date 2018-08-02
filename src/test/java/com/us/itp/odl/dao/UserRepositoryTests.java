@@ -10,18 +10,18 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.lang.NonNull;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
+@DataJpaTest
 @Transactional
-@SpringBootTest
 public class UserRepositoryTests {
 
-    @Rule public ExpectedException expected = ExpectedException.none();
+    @Rule public final ExpectedException expected = ExpectedException.none();
 
     @Autowired @NonNull UserRepository repo;
 

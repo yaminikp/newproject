@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UserServiceImpl implements UserService {
 
-    @NonNull private UserRepository db;
+    @NonNull private final UserRepository db;
 
     @Autowired
-    UserServiceImpl(UserRepository db) {
+    public UserServiceImpl(UserRepository db) {
         this.db = db;
     }
 
@@ -23,7 +23,7 @@ public final class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(@NonNull final User user) {
+    public void saveUser(@NonNull final User user) {
         db.save(user);
     }
 }

@@ -23,6 +23,6 @@ public final class UserController {
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public void createCustomer(@RequestBody @NonNull final CustomerDto dto) {
-        userService.createUser(dto.toCustomer());
+        userService.saveUser(dto.toCustomer());
     }
 }

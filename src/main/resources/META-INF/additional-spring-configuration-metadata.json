@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "odl.superadmin.username",
+      "type": "java.lang.String",
+      "description": "Username for the unique superadmin user."
+    },
+    {
+      "name": "odl.superadmin.password",
+      "type": "java.lang.String",
+      "description": "Encoded password for the unique superadmin user."
+    }
+  ]
+}
+

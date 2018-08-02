@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public final class UserServiceTests {
 
-    @Rule public ExpectedException expected = ExpectedException.none();
+    @Rule public final ExpectedException expected = ExpectedException.none();
 
     @NonNull private final UserService service = new UserServiceImpl(new FakeUserRepository());
 
@@ -36,7 +36,7 @@ public final class UserServiceTests {
                 /* phoneNumber = */ "555-555-5555",
                 /* aadhaarCardNumber = */ "1234 5678 9012"
         );
-        service.createUser(customer);
+        service.saveUser(customer);
         assertEquals(customer, service.lookupUser(customer.getUsername()));
         assertEquals(customer, service.loadUserByUsername(customer.getUsername()));
     }

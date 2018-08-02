@@ -38,7 +38,7 @@ public final class UserControllerTests {
                 .contentType(MediaType.APPLICATION_JSON).content(json)
                 .with(csrf())
         ).andExpect(status().isCreated());
-        verify(userService, times(1)).createUser(dto.toCustomer());
+        verify(userService, times(1)).saveUser(dto.toCustomer());
     }
 
     @NonNull private HashMap<String, String>  makeTestData() {

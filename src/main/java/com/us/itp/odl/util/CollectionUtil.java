@@ -8,9 +8,7 @@ import org.springframework.lang.Nullable;
 public final class CollectionUtil {
 
     private CollectionUtil() {
-        throw new AssertionError(
-                "CollectionUtil is a static utility class and cannot be instantiated"
-        );
+        StaticUtil.preventInstantiation(this.getClass());
     }
 
     @Nullable public static <E> E getFirst(

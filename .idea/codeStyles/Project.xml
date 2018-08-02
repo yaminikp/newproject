@@ -18,6 +18,7 @@
       </option>
     </JavaCodeStyleSettings>
     <codeStyleSettings language="JAVA">
+      <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
       <option name="ALIGN_THROWS_KEYWORD" value="true" />
     </codeStyleSettings>
   </code_scheme>
