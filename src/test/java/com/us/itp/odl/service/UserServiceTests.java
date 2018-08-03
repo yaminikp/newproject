@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import com.us.itp.odl.dao.FakeUserRepository;
 import com.us.itp.odl.model.Customer;
-import java.time.LocalDate;
+import com.us.itp.odl.model.TestModels;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,20 +20,7 @@ public final class UserServiceTests {
 
     @Test
     public void createdCustomerIsPersisted() {
-        final Customer customer = new Customer(
-                /* password = */ "myPassword",
-                /* realName = */ "Alice", "Mary", "Smith",
-                /* gender = */ "female",
-                /* dateOfBirth = */ LocalDate.of(2018, 10, 25),
-                /* address1 = */ "123 Main Street",
-                /* address2 = */ "apt 318",
-                /* city = */ "Woodbury",
-                /* pinCode */ "55125",
-                /* state = */ "MN",
-                /* country = */ "USA",
-                /* email = */ "alice@example.com",
-                /* phoneNumber = */ "555-555-5555"
-        );
+        final Customer customer = TestModels.getCustomer();
         service.saveUser(customer);
         assertEquals(customer, service.lookupUser(customer.getUsername()));
         assertEquals(customer, service.loadUserByUsername(customer.getUsername()));

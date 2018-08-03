@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Inheritance
 @ToString(exclude = "password")
-public abstract class User implements UserDetails {
+public abstract class User implements OdlEntity, UserDetails {
 
     @Id @GeneratedValue private long id;
 
