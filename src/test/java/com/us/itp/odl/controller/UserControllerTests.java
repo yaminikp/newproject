@@ -43,7 +43,6 @@ public final class UserControllerTests {
 
     @NonNull private HashMap<String, String>  makeTestData() {
         final HashMap<String, String> map = new HashMap<>();
-        map.put("username", "alice");
         map.put("password", "myPassword");
         map.put("firstName", "Alice");
         map.put("middleName", "Mary");
@@ -58,7 +57,6 @@ public final class UserControllerTests {
         map.put("country", "USA");
         map.put("email", "alice@example.com");
         map.put("phoneNumber", "555-555-5555");
-        map.put("aadhaarCardNumber", "1234 5678 9012");
         return map;
     }
 }

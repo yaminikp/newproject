@@ -40,12 +40,13 @@ public final class Customer extends User {
 
     @NonNull private Gender gender;
     @NonNull private LocalDate dateOfBirth;
-    @NonNull private String email;
     @NonNull private String phoneNumber;
-    @NonNull private String aadhaarCardNumber;
+
+    @NonNull public String getEmail() {
+        return getUsername();
+    }
 
     public Customer(
-            @NonNull final String username,
             @NonNull final String password,
             @NonNull final String firstName,
             @NonNull final String middleName,
@@ -59,16 +60,13 @@ public final class Customer extends User {
             @NonNull final String state,
             @NonNull final String country,
             @NonNull final String email,
-            @NonNull final String phoneNumber,
-            @NonNull final String aadhaarCardNumber
+            @NonNull final String phoneNumber
     ) {
-        super(username, password);
+        super(email, password);
         setRealName(firstName, middleName, lastName);
         setAddress(address1, address2, city, postalCode, state, country);
         this.gender = Gender.of(gender);
         this.dateOfBirth = dateOfBirth;
-        this.email = email;
         this.phoneNumber = phoneNumber;
-        this.aadhaarCardNumber = aadhaarCardNumber;
     }
 }

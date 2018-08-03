@@ -14,7 +14,6 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 public final class CustomerDto implements Serializable {
 
-    @NonNull private String username;
     @NonNull private String password;
     @NonNull private String firstName;
     @NonNull private String middleName;
@@ -29,11 +28,9 @@ public final class CustomerDto implements Serializable {
     @NonNull private String country;
     @NonNull private String email;
     @NonNull private String phoneNumber;
-    @NonNull private String aadhaarCardNumber;
 
     @NonNull public Customer toCustomer() {
         return new Customer(
-                /* username = */ username,
                 /* password = */ password,
                 /* firstName = */ firstName,
                 /* middleName = */ middleName,
@@ -47,8 +44,7 @@ public final class CustomerDto implements Serializable {
                 /* state = */ state,
                 /* country = */ country,
                 /* email = */ email,
-                /* phoneNumber = */ phoneNumber,
-                /* aadhaarCardNumber = */ aadhaarCardNumber
+                /* phoneNumber = */ phoneNumber
         );
     }
 }

@@ -21,11 +21,10 @@ public final class UserServiceTests {
     @Test
     public void createdCustomerIsPersisted() {
         final Customer customer = new Customer(
-                /* username = */ "alice",
                 /* password = */ "myPassword",
                 /* realName = */ "Alice", "Mary", "Smith",
                 /* gender = */ "female",
-                /* dateOfBirth = */ LocalDate.of(2018,10,25),
+                /* dateOfBirth = */ LocalDate.of(2018, 10, 25),
                 /* address1 = */ "123 Main Street",
                 /* address2 = */ "apt 318",
                 /* city = */ "Woodbury",
@@ -33,8 +32,7 @@ public final class UserServiceTests {
                 /* state = */ "MN",
                 /* country = */ "USA",
                 /* email = */ "alice@example.com",
-                /* phoneNumber = */ "555-555-5555",
-                /* aadhaarCardNumber = */ "1234 5678 9012"
+                /* phoneNumber = */ "555-555-5555"
         );
         service.saveUser(customer);
         assertEquals(customer, service.lookupUser(customer.getUsername()));
