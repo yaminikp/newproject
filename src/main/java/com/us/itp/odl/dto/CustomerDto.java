@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.us.itp.odl.model.Customer;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,9 @@ import org.springframework.lang.NonNull;
 public final class CustomerDto implements Serializable {
 
     @NonNull private String password;
-    @NonNull private String firstName;
+    @NotBlank @NonNull private String firstName;
     @NonNull private String middleName;
-    @NonNull private String lastName;
+    @NotBlank @NonNull private String lastName;
     @NonNull private String gender;
     @JsonFormat(pattern = "dd/MM/yyyy") @NonNull private LocalDate dateOfBirth;
     @NonNull private String address1;
