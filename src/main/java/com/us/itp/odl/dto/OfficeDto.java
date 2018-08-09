@@ -2,10 +2,14 @@ package com.us.itp.odl.dto;
 
 import com.us.itp.odl.model.Office;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public final class OfficeDto implements Serializable {
 
     @NonNull private String name;

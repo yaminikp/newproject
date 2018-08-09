@@ -1,6 +1,9 @@
 package com.us.itp.odl.util;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -16,5 +19,21 @@ public final class CollectionUtil {
             @NonNull final Predicate<E> pred
     ) {
         return coll.stream().filter(pred).findFirst().orElse(null);
+    }
+
+    @NonNull public static <E> Set<E> immutableSetOf(
+            @NonNull final Collection<? extends E> baseCollection,
+            @NonNull final Collection<? extends E> newElements
+    ) {
+        return Collections.unmodifiableSet(setOf(baseCollection, newElements));
+    }
+
+    @NonNull private static <E> Set<E> setOf(
+            @NonNull final Collection<? extends E> baseCollection,
+            @NonNull final Collection<? extends E> newElements
+    ) {
+        final Set<E> set = new HashSet<>(baseCollection);
+        set.addAll(newElements);
+        return set;
     }
 }

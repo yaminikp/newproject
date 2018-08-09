@@ -14,6 +14,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(@NonNull final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/customer").permitAll() // New customer registration
+                .antMatchers("/superadmin/**").hasAuthority("ROLE_SUPERADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .and().httpBasic();
