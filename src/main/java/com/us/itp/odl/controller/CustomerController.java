@@ -28,6 +28,10 @@ public final class CustomerController {
             @NonNull final BindingResult binding
     ) {
         if (binding.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (userService.userExists(dto.getEmail())) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
         userService.saveUser(dto.toCustomer());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

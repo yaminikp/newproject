@@ -5,6 +5,7 @@ import static com.us.itp.odl.util.MapUtil.mapOf;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +29,14 @@ public final class CustomerControllerTests extends CrudControllerBaseTests {
         final JsonDto<CustomerDto, ?> jdto = customerJdto();
         mvc.perform(createCustomer(jdto)).andExpect(status().isCreated());
         verify(userService, times(1)).saveUser(jdto.asDto().toCustomer());
+    }
+
+    @Test
+    public void duplicateCustomerIsRejected() throws Exception {
+        when(userService.userExists("alice@example.com")).thenReturn(true);
+        mvc.perform(createCustomer(customerJdto())).andExpect(status().isConflict());
+        verify(userService, times(1)).userExists("alice@example.com");
+        verify(userService, times(0)).saveUser(any());
     }
 
     @Test
@@ -81,7 +90,6 @@ public final class CustomerControllerTests extends CrudControllerBaseTests {
 
     @NonNull private JsonDto<CustomerDto, Map<String, String>> customerJdto() {
         return jsonDto(CustomerDto.class, mapOf(
-                entry("username", "alice"),
                 entry("password", "myPassword"),
                 entry("firstName", "Alice"),
                 entry("middleName", "Mary"),
@@ -95,8 +103,7 @@ public final class CustomerControllerTests extends CrudControllerBaseTests {
                 entry("state", "MN"),
                 entry("country", "USA"),
                 entry("email", "alice@example.com"),
-                entry("phoneNumber", "555-555-5555"),
-                entry("aadhaarCardNumber", "1234 5678 9012")
+                entry("phoneNumber", "555-555-5555")
         ));
     }
 }

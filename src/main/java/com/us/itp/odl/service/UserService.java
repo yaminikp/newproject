@@ -17,6 +17,10 @@ public interface UserService extends UserDetailsService {
     @Nullable User lookupUser(@NonNull String username);
     void saveUser(@NonNull User user);
 
+    default boolean userExists(@NonNull final String username) {
+        return lookupUser(username) != null;
+    }
+
     default void updateOrCreateUser(
             @NonNull final String username,
             @NonNull final Consumer<User> updater,
