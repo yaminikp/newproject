@@ -25,46 +25,31 @@ public final class Customer extends User {
         setRealName(new Name(firstName, middleName, lastName));
     }
 
-    @Setter(AccessLevel.PACKAGE)
-    @NonNull private Address address;
-    private void setAddress(
-            @NonNull final String address1,
-            @NonNull final String address2,
-            @NonNull final String city,
-            @NonNull final String postalCode,
-            @NonNull final String state,
-            @NonNull final String country
-    ) {
-        setAddress(new Address(address1, address2, city, postalCode, state, country));
-    }
-
     @NonNull private Gender gender;
     @NonNull private LocalDate dateOfBirth;
+
+    @NonNull private Address address;
     @NonNull private String phoneNumber;
 
+    @SuppressWarnings("unused")
     @NonNull public String getEmail() {
         return getUsername();
     }
 
     public Customer(
-            @NonNull final String password,
             @NonNull final String firstName,
             @NonNull final String middleName,
             @NonNull final String lastName,
             @NonNull final String gender,
             @NonNull final LocalDate dateOfBirth,
-            @NonNull final String address1,
-            @NonNull final String address2,
-            @NonNull final String city,
-            @NonNull final String postalCode,
-            @NonNull final String state,
-            @NonNull final String country,
+            @NonNull final Address address,
+            @NonNull final String phoneNumber,
             @NonNull final String email,
-            @NonNull final String phoneNumber
+            @NonNull final String password
     ) {
         super(email, password);
         setRealName(firstName, middleName, lastName);
-        setAddress(address1, address2, city, postalCode, state, country);
+        this.address = address;
         this.gender = Gender.of(gender);
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;

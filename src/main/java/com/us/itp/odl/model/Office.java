@@ -23,19 +23,14 @@ public final class Office implements OdlEntity {
             @NonNull final String name,
             @NonNull final String officeCode,
             @NonNull final String cityCode,
-            @NonNull final String address1,
-            @NonNull final String address2,
-            @NonNull final String city,
-            @NonNull final String postalCode,
-            @NonNull final String state,
-            @NonNull final String country,
+            @NonNull final Address address,
             @NonNull final String phoneNumber,
             @NonNull final String email
     ) {
         this.name = name;
         this.officeCode = officeCode;
         this.cityCode = cityCode;
-        this.address = new Address(address1, address2, city, postalCode, state, country);
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }

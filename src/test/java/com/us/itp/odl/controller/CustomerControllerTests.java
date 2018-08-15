@@ -11,48 +11,67 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.us.itp.odl.dto.CustomerDto;
 import com.us.itp.odl.dto.JsonDto;
 import com.us.itp.odl.service.UserService;
+import com.us.itp.odl.validation.CustomerJdtoValidationTester;
+import java.io.Serializable;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.lang.NonNull;
 
-public final class CustomerControllerTests extends CreateResourceBaseTests<CustomerDto> {
+public final class CustomerControllerTests extends CreateResourceBaseTests<CustomerDto>
+        implements CustomerJdtoValidationTester {
 
-    @MockBean private UserService userService;
+    @MockBean
+    private UserService userService;
 
     public CustomerControllerTests() {
         super(CustomerDto.class, "/customer");
     }
 
     @Override
-    @NonNull JsonDto<CustomerDto> prototypeJdto() {
+    @NonNull
+    public JsonDto<CustomerDto> prototypeJdto() {
         return jdto(mapOf(
-                entry("password", "myPassword"),
                 entry("firstName", "Alice"),
                 entry("middleName", "Mary"),
                 entry("lastName", "Smith"),
                 entry("gender", "female"),
                 entry("dateOfBirth", "25/11/1998"),
-                entry("address1", "123 Main Street"),
-                entry("address2", "Apt. 318"),
-                entry("city", "Woodbury"),
-                entry("postalCode", "55125"),
-                entry("state", "MN"),
-                entry("country", "USA"),
+                entry("address", (Serializable) mapOf(
+                        entry("address1", "123 Main Street"),
+                        entry("address2", "Apt. 318"),
+                        entry("city", "Woodbury"),
+                        entry("postalCode", "55125"),
+                        entry("state", "MN"),
+                        entry("country", "USA")
+                )),
+                entry("phoneNumber", "555-555-5555"),
                 entry("email", "alice@example.com"),
-                entry("phoneNumber", "555-555-5555")
+                entry("password", "P@ssw0rd")
         ));
     }
 
     @Override
-    void assertResourceIsAccepted(@NonNull final JsonDto<CustomerDto> jdto) throws Exception {
+    public void assertResourceIsAccepted(
+            @NonNull final JsonDto<CustomerDto> jdto
+    ) throws Exception {
         mvc.perform(createResource(jdto)).andExpect(status().isCreated());
         verify(userService, times(1)).saveUser(jdto.asDto().toCustomer());
+        Mockito.reset(userService);
     }
 
     @Override
-    void assertResourceIsRejected(@NonNull final JsonDto<CustomerDto> jdto) throws Exception {
+    public void assertResourceIsRejected(
+            @NonNull final JsonDto<CustomerDto> jdto
+    ) throws Exception {
         mvc.perform(createResource(jdto)).andExpect(status().isBadRequest());
         verify(userService, times(0)).saveUser(any());
+        Mockito.reset(userService);
+    }
+
+    @Test
+    public void resourceIsValidated() throws Exception {
+        assertResourceValidatedAsCustomer();
     }
 
     @Test
@@ -61,15 +80,5 @@ public final class CustomerControllerTests extends CreateResourceBaseTests<Custo
         mvc.perform(createResource()).andExpect(status().isConflict());
         verify(userService, times(1)).userExists("alice@example.com");
         verify(userService, times(0)).saveUser(any());
-    }
-
-    @Test
-    public void firstNameMustBeNonBlank() throws Exception {
-        assertAttributeMustBeNonBlank("firstName");
-    }
-
-    @Test
-    public void lastNameMustBeNonBlank() throws Exception {
-        assertAttributeMustBeNonBlank("lastName");
     }
 }

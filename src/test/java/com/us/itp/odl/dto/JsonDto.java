@@ -27,6 +27,13 @@ public final class JsonDto<T> {
         return jsonMapper.readValue(this.asJson(), dtoClass);
     }
 
+    @NonNull public <A> JsonDto<T> with(
+            @NonNull final String attribute,
+            @NonNull final JsonDto<A> subJdto
+    ) {
+        return this.with(attribute, (Serializable) subJdto.attributeMap);
+    }
+
     @NonNull public JsonDto<T> with(
             @NonNull final String attribute,
             @Nullable final Serializable value
@@ -38,5 +45,15 @@ public final class JsonDto<T> {
             @NonNull final UnaryOperator<Map<String, Serializable>> transform
     ) {
         return new JsonDto<>(dtoClass, jsonMapper, transform.apply(attributeMap));
+    }
+
+    @SuppressWarnings("unchecked")
+    @NonNull public <A> JsonDto<A> subJdtoAt(
+            @NonNull final Class<A> subDtoClass,
+            @NonNull final String attribute
+    ) {
+        return new JsonDto<>(subDtoClass, jsonMapper,
+                (Map<String, Serializable>) attributeMap.get(attribute)
+        );
     }
 }

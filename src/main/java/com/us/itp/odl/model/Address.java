@@ -10,7 +10,7 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-final class Address {
+public final class Address {
     @NonNull private String address1;
     @NonNull private String address2;
     @NonNull private String city;
