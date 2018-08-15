@@ -2,12 +2,14 @@ package com.us.itp.odl.controller;
 
 import com.us.itp.odl.dto.OfficeDto;
 import com.us.itp.odl.service.OfficeService;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class SuperadminController {
@@ -19,8 +21,12 @@ public class SuperadminController {
     }
 
     @PostMapping("/superadmin/office")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createOffice(@RequestBody @NonNull final OfficeDto dto) {
+    public ResponseEntity<Void> createOffice(
+            @RequestBody @NonNull @Valid final OfficeDto dto,
+            @NonNull final BindingResult binding
+    ) {
+        if (binding.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         officeService.saveOffice(dto.toOffice());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

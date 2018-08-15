@@ -24,4 +24,14 @@ public final class MapUtil {
     @NonNull public static <K, V> Pair<K, V> entry(@NonNull final K key, @Nullable final V value) {
         return Pair.of(key, value);
     }
+
+    @NonNull public static <K, V> Map<K, V> append(
+            @NonNull final Map<K, V> map,
+            @NonNull final K key,
+            @Nullable final V value
+    ) {
+        final Map<K, V> outMap = new HashMap<>(map);
+        outMap.put(key, value);
+        return outMap;
+    }
 }
