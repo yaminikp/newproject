@@ -3,6 +3,7 @@ package com.us.itp.odl.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import com.us.itp.odl.model.Customer;
 import com.us.itp.odl.model.TestUser;
 import com.us.itp.odl.model.User;
 import java.util.UUID;
@@ -56,5 +57,25 @@ public class UserRepositoryTests extends RepositoryBaseTests<User, UserRepositor
         repo.save(makeTestEntity(name));
         expected.expect(DataIntegrityViolationException.class);
         repo.saveAndFlush(makeTestEntity(name));
+    }
+
+    @Test
+    public void countOfUsersByTypeIsZeroForEmptyRepo() {
+        assertEquals(0, repo.countUsersOfType(User.class));
+    }
+
+    @Test
+    public void countOfUsersByTypeIsAccurate() {
+        repo.save(makeTestEntity());
+        repo.save(makeTestEntity());
+        repo.saveAndFlush(makeTestEntity());
+        assertEquals(3, repo.countUsersOfType(TestUser.class));
+    }
+
+    @Test
+    public void countOfUsersByTypeSeesOnlyRequestedType() {
+        repo.saveAndFlush(makeTestEntity());
+        assertEquals(0, repo.countUsersOfType(Customer.class));
+        assertEquals(1, repo.countUsersOfType(TestUser.class));
     }
 }

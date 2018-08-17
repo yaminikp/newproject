@@ -34,14 +34,13 @@ public class OfficeAdminDto {
     @PhoneNumber @NonNull private String phoneNumber;
     @NotBlank @Email @NonNull private String email;
 
-    @NotBlank @NonNull private String username;
     @Password @NonNull private String password;
 
     @NonNull public OfficeAdmin toOfficeAdmin(@NonNull final Office office) {
         assert office.getOfficeCode().equals(officeCode);
         return new OfficeAdmin(
                 office, firstName, middleName, lastName, gender, dateOfBirth,
-                address.toAddress(), phoneNumber, email, username, password
+                address.toAddress(), phoneNumber, email, password
         );
     }
 }

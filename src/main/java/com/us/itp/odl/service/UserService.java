@@ -15,7 +15,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public interface UserService extends UserDetailsService {
 
     @Nullable User lookupUser(@NonNull String username);
-    void saveUser(@NonNull User user);
+
+    /**
+     * Persists the given {@code User}.
+     *
+     * @return a possibly different instance of the saved {@code User} that reflects any changes
+     *   made as part of the persistence operation (such as auto-generation of ID and username in
+     *   the case of a freshly-created {@code User}).
+     */
+    @NonNull <T extends User> T saveUser(@NonNull T user);
 
     default boolean userExists(@NonNull final String username) {
         return lookupUser(username) != null;

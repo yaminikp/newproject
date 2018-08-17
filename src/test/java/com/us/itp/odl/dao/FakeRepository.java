@@ -127,8 +127,17 @@ class FakeRepository<T extends OdlEntity> implements JpaRepository<T, Long> {
 
     @Override
     @NonNull public <S extends T> S save(@NonNull final S entity) {
+        if (entity.getId() == 0) initializeId(entity);
         db.put(entity.getId(), entity);
         return entity;
+    }
+
+    private <S extends T> void initializeId(@NonNull final S entity) {
+        entity.setId(maxId() + 1);
+    }
+
+    private long maxId() {
+        return db.keySet().stream().max(Long::compare).orElse(0L);
     }
 
     @Override

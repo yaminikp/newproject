@@ -44,9 +44,7 @@ public class SuperadminController {
             @NonNull final BindingResult binding
     ) {
         if (binding.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        if (userService.userExists(dto.getUsername())) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+
         final Office office = officeService.lookupOffice(dto.getOfficeCode());
         if (office == null) return new ResponseEntity<>(HttpStatus.CONFLICT);
 

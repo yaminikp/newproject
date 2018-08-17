@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public final class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @NonNull private final UserRepository db;
 
@@ -23,7 +24,9 @@ public final class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(@NonNull final User user) {
-        db.save(user);
+    @Transactional
+    @NonNull public <T extends User> T saveUser(@NonNull final T user) {
+        user.initializeUsername(() -> db.countUsersOfType(user.getClass()) + 1);
+        return db.save(user);
     }
 }

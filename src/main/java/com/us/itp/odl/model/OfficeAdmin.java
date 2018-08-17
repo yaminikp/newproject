@@ -12,7 +12,7 @@ import org.springframework.lang.NonNull;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
-public class OfficeAdmin extends CommonUser {
+public class OfficeAdmin extends CommonUser implements User.AutogeneratesUsername {
 
     @ManyToOne @NonNull private Office office;
 
@@ -26,13 +26,17 @@ public class OfficeAdmin extends CommonUser {
             @NonNull final Address address,
             @NonNull final String phoneNumber,
             @NonNull final String email,
-            @NonNull final String username,
             @NonNull final String password
     ) {
-        super(username, password,
+        super(/* username = */ null, password,
                 firstName, middleName, lastName,
                 gender, dateOfBirth, address, phoneNumber, email
         );
         this.office = office;
+    }
+
+    @Override
+    @NonNull public String generateUsername(final long usernameIndex) {
+        return String.format("ODL%sADMIN%04d", office.getCityCode(), usernameIndex);
     }
 }

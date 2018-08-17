@@ -24,6 +24,13 @@ public final class CollectionUtil {
         return coll.stream().filter(pred).findFirst().orElse(null);
     }
 
+    @Nullable public static <E> long count(
+            @NonNull final Collection<E> coll,
+            @NonNull final Predicate<E> pred
+    ) {
+        return coll.stream().filter(pred).count();
+    }
+
     @NonNull public static <E, R> List<R> mapToList(
             @NonNull final Collection<E> coll,
             @NonNull final Function<E, R> transform

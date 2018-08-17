@@ -46,7 +46,6 @@ public final class TestModels {
                 /* address = */ getAddress(),
                 /* phoneNumber = */ "555-555-0123",
                 /* email = */ "bob@example.com",
-                /* username = */ "officeAdmin",
                 /* password = */ "sw0rdF!sh"
         );
     }

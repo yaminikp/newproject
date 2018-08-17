@@ -67,7 +67,6 @@ public class OfficeAdminCreationTests extends ResourceCreationBaseTests<OfficeAd
                 )),
                 entry("phoneNumber", "555-555-0123"),
                 entry("email", "bob@example.com"),
-                entry("username", "officeAdmin"),
                 entry("password", "sw0rdF!sh")
         ));
     }
@@ -102,13 +101,6 @@ public class OfficeAdminCreationTests extends ResourceCreationBaseTests<OfficeAd
     public void creatingOfficeRequiresSuperadmin() throws Exception {
         mvc.perform(createResource().with(anonymous())).andExpect(status().isUnauthorized());
         mvc.perform(createResource().with(user("user"))).andExpect(status().isForbidden());
-    }
-
-    @Test
-    public void duplicateOfficeAdminIsRejected() throws Exception {
-        when(userService.userExists(prototypeJdto().asDto().getUsername())).thenReturn(true);
-        mvc.perform(createResource()).andExpect(status().isConflict());
-        verify(userService, times(0)).saveUser(any());
     }
 
     @Test

@@ -13,15 +13,13 @@ public interface OfficeAdminJdtoValidationTester extends JsonDtoValidationTester
     /* private */ String ADDRESS = "address";
     /* private */ String PHONE_NUMBER = "phoneNumber";
     /* private */ String EMAIL = "email";
-    /* private */ String USERNAME = "username";
     /* private */ String PASSWORD = "password";
 
     /* private */ String DATE_FORMAT = "dd/MM/yyyy";
 
     default void assertResourceValidatedAsOfficeAdmin() throws Exception {
-        assertAttributesValidatedAsNonBlank(
-                OFFICE_CODE, FIRST_NAME, LAST_NAME, GENDER, DOB, ADDRESS, EMAIL, PHONE_NUMBER,
-                USERNAME, PASSWORD);
+        assertAttributesValidatedAsNonBlank(OFFICE_CODE, FIRST_NAME, LAST_NAME, GENDER, DOB,
+                ADDRESS, EMAIL, PHONE_NUMBER, PASSWORD);
         assertAttributeMayBeBlank(MIDDLE_NAME);
         assertAttributesValidatedAsThreeLetterCodes(OFFICE_CODE);
         assertAttributesValidatedAsNames(FIRST_NAME, MIDDLE_NAME, LAST_NAME);

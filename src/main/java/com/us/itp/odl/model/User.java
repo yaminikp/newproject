@@ -4,7 +4,7 @@ import static com.us.itp.odl.security.AuthorityUtil.authoritySet;
 
 import java.util.Collection;
 import java.util.Set;
-import javax.persistence.Column;
+import java.util.function.Supplier;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +12,9 @@ import javax.persistence.Inheritance;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,12 +29,22 @@ public abstract class User implements OdlEntity, UserDetails {
 
     @Id @GeneratedValue private long id;
 
-    @Column(unique = true) @NonNull private String username;
+    @NaturalId private String username;
     @NonNull private String password;
 
-    public User(@NonNull final String username, @NonNull final String password) {
+    public User(@Nullable final String username, @NonNull final String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public final void initializeUsername(Supplier<Long> indexGenerator) {
+        if (username == null && this instanceof AutogeneratesUsername) {
+            username = ((AutogeneratesUsername) this).generateUsername(indexGenerator.get());
+        }
+    }
+
+    interface AutogeneratesUsername {
+        @NonNull String generateUsername(long usernameIndex);
     }
 
     @Override

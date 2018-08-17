@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 /** Represents a typical ODL user, as opposed to the Superadmin. */
 @Data
@@ -32,7 +33,7 @@ abstract class CommonUser extends User {
     @NonNull private String email;
 
     CommonUser(
-            @NonNull final String username,
+            @Nullable final String username,
             @NonNull final String password,
             @NonNull final String firstName,
             @NonNull final String middleName,
