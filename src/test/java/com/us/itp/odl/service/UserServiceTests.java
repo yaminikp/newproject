@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import com.us.itp.odl.dao.FakeUserRepository;
-import com.us.itp.odl.model.Customer;
 import com.us.itp.odl.model.TestModels;
+import com.us.itp.odl.model.User;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,10 +20,18 @@ public final class UserServiceTests {
 
     @Test
     public void createdCustomerIsPersisted() {
-        final Customer customer = TestModels.getCustomer();
-        service.saveUser(customer);
-        assertEquals(customer, service.lookupUser(customer.getUsername()));
-        assertEquals(customer, service.loadUserByUsername(customer.getUsername()));
+        createdUserIsPersisted(TestModels.getCustomer());
+    }
+
+    @Test
+    public void createdOfficeAdminIsPersisted() {
+        createdUserIsPersisted(TestModels.getOfficeAdmin());
+    }
+
+    private void createdUserIsPersisted(@NonNull final User user) {
+        service.saveUser(user);
+        assertEquals(user, service.lookupUser(user.getUsername()));
+        assertEquals(user, service.loadUserByUsername(user.getUsername()));
     }
 
     @Test

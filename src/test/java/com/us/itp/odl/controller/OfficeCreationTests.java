@@ -20,12 +20,12 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.lang.NonNull;
 
-public final class SuperadminControllerTests extends CreateResourceBaseTests<OfficeDto>
+public final class OfficeCreationTests extends ResourceCreationBaseTests<OfficeDto>
         implements OfficeJdtoValidationTester {
 
     @MockBean private OfficeService officeService;
 
-    public SuperadminControllerTests() {
+    public OfficeCreationTests() {
         super(OfficeDto.class, "/superadmin/office", "superadmin", Superadmin.AUTHORITIES);
     }
 

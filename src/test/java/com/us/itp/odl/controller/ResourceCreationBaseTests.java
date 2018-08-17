@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.request.RequestPostProcessor;
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public abstract class CreateResourceBaseTests<T> implements JsonDtoValidationTester<T> {
+public abstract class ResourceCreationBaseTests<T> implements JsonDtoValidationTester<T> {
 
     @Autowired MockMvc mvc;
 
@@ -38,7 +38,7 @@ public abstract class CreateResourceBaseTests<T> implements JsonDtoValidationTes
     @NonNull private final String createResourceUrl;
     @NonNull private final RequestPostProcessor userProc;
 
-    CreateResourceBaseTests(
+    ResourceCreationBaseTests(
             @NonNull final Class<T> dtoClass,
             @NonNull final String createResourceUrl
     ) {
@@ -47,7 +47,7 @@ public abstract class CreateResourceBaseTests<T> implements JsonDtoValidationTes
         this.userProc = request -> request;
     }
 
-    CreateResourceBaseTests(
+    ResourceCreationBaseTests(
             @NonNull final Class<T> dtoClass,
             @NonNull final String createResourceUrl,
             @NonNull final String username,

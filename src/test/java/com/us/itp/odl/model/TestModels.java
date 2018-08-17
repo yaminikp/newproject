@@ -11,9 +11,13 @@ public final class TestModels {
     }
 
     @NonNull public static Office getOffice() {
+        return getOffice("TOF");
+    }
+
+    @NonNull public static Office getOffice(@NonNull final String officeCode) {
         return new Office(
                 /* name = */ "Test Office",
-                /* officeCode = */ "TOF",
+                /* officeCode = */ officeCode,
                 /* cityCode = */ "NWH",
                 /* address = */ getAddress(),
                 /* phoneNumber = */ "555-555-5555",
@@ -30,6 +34,20 @@ public final class TestModels {
                 /* phoneNumber = */ "555-555-5555",
                 /* email = */ "alice@example.com",
                 /* password = */ "myPassword"
+        );
+    }
+
+    @NonNull public static OfficeAdmin getOfficeAdmin() {
+        return new OfficeAdmin(
+                /* office = */ getOffice(),
+                /* realName = */ "Bob", "", "Howard",
+                /* gender = */ "male",
+                /* dateOfBirth = */ LocalDate.of(1978, 4, 18),
+                /* address = */ getAddress(),
+                /* phoneNumber = */ "555-555-0123",
+                /* email = */ "bob@example.com",
+                /* username = */ "officeAdmin",
+                /* password = */ "sw0rdF!sh"
         );
     }
 

@@ -8,7 +8,7 @@ import org.springframework.lang.NonNull;
 
 @Data
 @Entity
-public final class Office implements OdlEntity {
+public class Office implements OdlEntity {
 
     @Id @GeneratedValue private long id;
 

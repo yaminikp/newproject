@@ -273,6 +273,17 @@ public interface JsonDtoValidationTester<T> {
         ));
     }
 
+    /* protected final */ default void assertAttributesValidatedAsThreeLetterCodes(
+            @NonNull final String... attributes
+    ) throws Exception {
+        for (final String attribute : attributes) {
+            assertAttributeValuesAccepted(attribute, Arrays.asList("ABC", "XYZ", "AAA"));
+            assertAttributeValuesRejected(attribute, Arrays.asList(
+                    "A", "ABCD", "abc", "AÉI", "P2P", "A@B", "A-Z", "", null
+            ));
+        }
+    }
+
     /* protected final */ default void assertAttributeValuesAccepted(
             @NonNull final String attribute,
             @NonNull final Collection<? extends Serializable> values

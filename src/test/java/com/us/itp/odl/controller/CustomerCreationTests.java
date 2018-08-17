@@ -18,13 +18,13 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.lang.NonNull;
 
-public final class CustomerControllerTests extends CreateResourceBaseTests<CustomerDto>
+public final class CustomerCreationTests extends ResourceCreationBaseTests<CustomerDto>
         implements CustomerJdtoValidationTester {
 
     @MockBean
     private UserService userService;
 
-    public CustomerControllerTests() {
+    public CustomerCreationTests() {
         super(CustomerDto.class, "/customer");
     }
 
