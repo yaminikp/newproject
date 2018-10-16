@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/reference::cssRef"></div>
+    <title>GLACIER ADD TEACHER</title>
+    <style>
+                    /* The message box is shown when the user clicks on the password field */
+            #message {
+                display:none;
+                background: #f1f1f1;
+                color: #000;
+                position: relative;
+                padding: 20px;
+                margin-top: 90px;
+            }
+
+            #message p {
+                padding: 1px 20px;
+                font-size: 1 px;
+            }
+
+            /* Add a green text color and a checkmark when the requirements are right */
+            .valid {
+                color: green;
+            }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                content: "✔";
+            }
+
+            /* Add a red text color and an "x" when the requirements are wrong */
+            .invalid {
+                color: red;
+            }
+
+            .invalid:before {
+                position: relative;
+                left: -35px;
+                content: "✖";
+            }
+
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments/reference::admin-dashboard-top"></div>
+
+<div class="parent-wrapper" id="outer-wrapper">
+    <!-- SIDE MENU -->
+    <div th:replace="fragments/reference::admin-sidemenu"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content" id="content-wrapper">
+        <form th:action="@{/ad/addteachersuccess}" th:object="${profileModel}"
+              method="post">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 clear-padding-xs">
+                        <h5 class="page-title"><i class="fa fa-user-secret"></i>ADD TEACHER RECORD</h5>
+                        <div class="section-divider"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 clear-padding-xs">
+                        <div class="col-md-12">
+                            <!-- Begin Teacher Info -->
+
+                            <div class="dash-item first-dash-item">
+                                <h6 class="item-title"><i class="fa fa-user"></i>TEACHER INFO</h6>
+                                <div id="useridexists" class="alert alert-danger alert-dismissable reviewContent hidden-ele">
+                                    <font style="color: blue"> <b> The user name already exists </b> </font>
+                                </div>
+                                <div id="only_alpha" class="alert alert-danger alert-dismissable reviewContent hidden-ele">
+                                    <font style="color: blue"> <b> Please enter only alphabets for names</b> </font>
+                                </div>
+
+                                <div class="inner-item">
+                                    <div class="dash-form">
+                                        <div class="col-sm-3">
+                                            <label class="clear-top-margin"><i class="fa fa-user-circle-o"></i>FIRST
+                                                NAME *</label>
+                                            <input id="firstname" th:field="*{firstName}" type="text" required="required" maxlength="45"/>
+                                            <input id="institutionid" th:field="*{institutionId}" type="hidden"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="clear-top-margin"><i class="fa fa-user-circle-o"></i>MIDDLE
+                                                NAME</label>
+                                            <input id="middlename" th:field="*{middleName}" type="text"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="clear-top-margin"><i class="fa fa-user-circle-o"></i>LAST
+                                                NAME *</label>
+                                            <input id="lastname" th:field="*{lastName}" type="text" required="required" maxlength="45" pattern=".{3,}" title="3 characters minimum"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="clear-top-margin"><i class="fa fa-venus"></i>GENDER *</label>
+                                            <select th:field="*{gender}" required="required">
+                                                <option value="">-- Select --</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-calendar"></i>DATE OF BIRTH *</label>
+                                            <input th:field="*{dob}" class="dobDatePicker" placeholder="DD/MM/YYYY" required="required" readonly="readonly"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-user"></i>USERNAME *</label>
+                                            <input id="username" th:field="*{userId}" type="text" required="required" maxlength="45"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-unlock"></i>PASSWORD *</label>
+                                            <input id="pwd" th:field="*{password}" type="text" required="required"/>
+                                        </div>
+                                        <div id="message">
+                                            <h6>Password must contain the following:</h6>
+                                            <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                            <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                            <p id="special" class="invalid">A <b>special</b> character</p>
+                                            <p id="number" class="invalid">A <b>number</b></p>
+                                            <p id="length" class="invalid"><b>8 </b>to <b>15 characters</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- End Teacher Info -->
+                            <!-- Begin Contact Info -->
+                            <div class="dash-item">
+                                <h6 class="item-title"><i class="fa fa-home"></i>CONTACT INFO</h6>
+                                <div class="inner-item">
+                                    <div class="dash-form">
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-phone"></i>PHONE #</label>
+                                            <!--<div class="phone-list">
+                                                <div class="input-group phone-input">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                                data-toggle="dropdown"
+                                                                aria-expanded="false"><span
+                                                                class="type-text">Type</span> <span
+                                                                class="caret"></span>
+                                                        </button>
+							                                    <ul class="dropdown-menu" role="menu">
+								                                    <li><a class="changeType" href="javascript:;"
+                                                                           data-type-value="Mobile">Mobile</a></li>
+                                                                    <li><a class="changeType" href="javascript:;"
+                                                                           data-type-value="Home">Home</a></li>
+                                                                    <li><a class="changeType" href="javascript:;"
+                                                                           data-type-value="Work">Work</a></li>
+							                                    </ul>
+						                            </span>
+                                                    <input type="hidden" name="phone" class="type-input"
+                                                           value=""/>-->
+                                            <input th:field="*{phone}" type="text" name="phone"
+                                                   placeholder="+91 (999) 999 9999"/>
+                                            <!--</div>
+                                        </div>-->
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-envelope-o"></i>EMAIL</label>
+                                            <input class="emailid" th:field="*{email}" type="email"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-home"></i>ADDRESS</label>
+                                            <input th:field="*{address}" type="text"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-home"></i>CITY</label>
+                                            <input th:field="*{city}" type="text"/>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-code"></i>PIN</label>
+                                            <input id="pin" th:field="*{pin}" type="text" maxlength="6"/>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-id-card"></i>STATE</label>
+                                            <select th:field="*{state}">
+                                                <option value="">SELECT</option>
+                                                <option value="ANDHRA PRADESH">ANDHRA PRADESH</option>
+                                                <option value="ARUNACHAL PRADESH">ARUNACHAL PRADESH</option>
+                                                <option value="ASSAM">ASSAM</option>
+                                                <option value="BIHAR">BIHAR</option>
+                                                <option value="CHHATTISGARH">CHHATTISGARH</option>
+                                                <option value="GOA">GOA</option>
+                                                <option value="GUJARAT">GUJARAT</option>
+                                                <option value="HARYANA">HARYANA</option>
+                                                <option value="HIMACHAL PRADESH">HIMACHAL PRADESH</option>
+                                                <option value="JAMMU AND KASHMIR">JAMMU AND KASHMIR</option>
+                                                <option value="JHARKHAND">JHARKHAND</option>
+                                                <option value="KARNATAKA">KARNATAKA</option>
+                                                <option value="KERALA">KERALA</option>
+                                                <option value="MADYA PRADESH">MADYA PRADESH</option>
+                                                <option value="MAHARASHTRA">MAHARASHTRA</option>
+                                                <option value="MANIPUR">MANIPUR</option>
+                                                <option value="MEGHALAYA">MEGHALAYA</option>
+                                                <option value="MIZORAM">MIZORAM</option>
+                                                <option value="NAGALAND">NAGALAND</option>
+                                                <option value="ODISHA">ODISHA</option>
+                                                <option value="PUNJAB">PUNJAB</option>
+                                                <option value="RAJASTHAN">RAJASTHAN</option>
+                                                <option value="SIKKIM">SIKKIM</option>
+                                                <option value="TAMIL NADU">TAMIL NADU</option>
+                                                <option value="TRIPURA">TRIPURA</option>
+                                                <option value="UTTARANCHAL">UTTARANCHAL</option>
+                                                <option value="UTTAR PRADESH">UTTAR PRADESH</option>
+                                                <option value="WEST BENGAL">WEST BENGAL</option>
+                                                <option value="ANDAMAN AND NICOBAR ISLANDS">ANDAMAN AND NICOBAR
+                                                    ISLANDS
+                                                </option>
+                                                <option value="CHANDIGARH">CHANDIGARH</option>
+                                                <option value="DADAR AND NAGAR HAVELI">DADAR AND NAGAR HAVELI</option>
+                                                <option value="DELHI">DELHI</option>
+                                                <option value="LAKSHADEEP">LAKSHADEEP</option>
+                                                <option value="PONDICHERRY">PONDICHERRY</option>
+                                            </select>
+                                        </div>
+                                        <!--<div class="col-sm-3">
+                                            <label><i class="fa fa-flag"></i>COUNTRY</label>
+                                            <input th:field="*{country}" type="text"/>
+                                        </div>-->
+
+                                        <div class="col-sm-3">
+                                            <label><i class="fa fa-star"></i>ACTIVATION STATUS *</label>
+                                            <select th:field="*{isActive}" required="required">
+                                                <option value="">SELECT</option>
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div id="valid_email" class="alert alert-danger alert-dismissable reviewContent hidden-ele">
+                                            <font style="color: blue"> <b> Please enter valid email address</b> </font>
+                                        </div>
+                                        <div id="invalid_pin" class="alert alert-danger alert-dismissable reviewContent hidden-ele">
+                                            <font style="color: blue"> <b> Please enter only numbers for PIN</b> </font>
+                                        </div>
+                                        <div id="pswd_info" class="alert alert-danger alert-dismissable reviewContent hidden-ele">
+                                            <!--<font style="color: blue"> <b> Password length must be 8-15 and must have atleast one letter, one capital letter, one number and one special character
+                                            </b> </font>-->
+                                            <h4>Password must meet the following requirements:</h4>
+                                            <ul>
+                                                <li>length <strong>8-15 characters</strong></li>
+                                                <li>At least <strong>one lowercase letter</strong></li>
+                                                <li>At least <strong>one capital letter</strong></li>
+                                                <li>At least <strong>one number</strong></li>
+                                                <li>At least <strong>one special character</strong></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-12">
+                                            <p>
+                                                <button type="submit" class="btn btn-info button-margin" id="save"><i class="fa fa-paper-plane"></i> <b>ADD
+                                                    TEACHER RECORD</b></button>
+                                            </p>
+                                            <!--<button id="save" type="submit" value="submit" class="btn btn-success button-margin">
+                                                <span class="glyphicon glyphicon-ok"></span>Add Teacher Record
+                                            </button>-->
+                                            <!--<a th:href="@{/ad/addteachersuccess}"><i class="fa fa-paper-plane"></i> SAVE</a>-->
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- End Contact Info -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="menu-togggle-btn">
+            <a href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></a>
+        </div>
+        <div th:replace="fragments/reference::glacier-footer"></div>
+    </div>
+    <!-- End Main Content -->
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jQuery_v3_2_0.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/plugins/owl.carousel.min.js"></script>
+<!--<script src="/plugins/Chart.min.js"></script>-->
+<!--<script src="/plugins/jquery.dataTables.min.js"></script>-->
+<!--<script src="/plugins/dataTables.responsive.min.js"></script>-->
+<script src="/js/js.js"></script>
+<script>
+//<![CDATA[
+var myInput = document.getElementById("pwd");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var special = document.getElementById("special");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+pwd.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+pwd.onblur = function() {
+    document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+pwd.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(pwd.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(pwd.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+   //Validate Special characters
+   //var splChars = /^[!@#$%\^&*)(+=._-]*$/;
+    //var splChars = /[*|,\":<>[]{}`\';()@&$#%!]/g;
+     var splChars = /[!@#$%^&*(),.?":{}|<>]/g;
+    if(pwd.value.match(splChars)) {
+
+            special.classList.remove("invalid");
+            special.classList.add("valid");
+        }else {
+            special.classList.remove("valid");
+            special.classList.add("invalid");
+    }
+
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(pwd.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(pwd.value.length >= 8 && pwd.value.length <= 15) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+//]]>
+</script>
+
+<script>
+$(document).ready(function () {
+$('#firstname,#middlename,#lastname').keydown(function (e) {
+    $('#only_alpha').hide();
+    var regex = new RegExp("^[a-zA-Z\\s]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (e.keyCode != 8){
+        if (!regex.test(str)) {
+
+            e.preventDefault();
+            $('#only_alpha').show();
+            return false;
+        }else{
+
+            $('#only_alpha').hide();
+
+        }
+    }
+});
+
+$('#firstname,#middlename,#lastname').focusout(function (){
+     $('#only_alpha').hide();
+});
+
+$('#username').focusout(function () {
+        $('#useridexists').hide();
+        var userid = $('#username').val();
+        //alert("userid:"+userid);
+        $.ajax({
+            type: 'GET',
+            url: 'isUseridExists'+'/'+userid+'/'+0,
+            success:function(resp){
+               //alert(resp);
+               if(resp){
+                    $('#useridexists').show();
+                    $('#username').val('');
+                    $('#username').focus();
+               }
+
+            }
+        });
+});
+
+
+
+$('.emailid').focusout(function(){
+    //alert("email focusout");
+    $("#valid_email").hide();
+        if(!isValidEmail($('.emailid').val())){
+                //alert("invalid");
+                $("#valid_email").show();
+                event.preventDefault();
+
+        }
+});
+function isValidEmail(email){
+            //alert("validate "+ email);
+            var empty = /^$/;
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            //alert("fil:"+filter);
+            if(empty.test(email)){
+                return true;
+            }
+            else if (filter.test(email)) {
+                //alert("valid");
+                return true;
+            }
+            else {
+                //alert("invalid");
+                return false;
+            }
+}
+});
+</script>
+<script>
+//<![CDATA[
+  $(document).ready(function(){
+      $('#pwd').keydown(function(e) {
+      if (e.keyCode == 32) {
+                return false;
+            }
+        });
+  });
+//]]>
+</script>
+
+<script>
+//<![CDATA[
+$(document).ready(function(){
+    $("#save").on("click",function(event){
+            $("#pwd_info").hide();
+            $('#firstname').val($('#firstname').val().trim());
+            $('#lastname').val($('#lastname').val().trim());
+            if($("#useridexists").is(":visible")){
+                $('#useridexists').show();
+                event.preventDefault();
+            }
+            $('#pswd_info').hide();
+            //alert("validate pwd");
+            /*if($('#pwd').val()){
+                alert("not empty");
+            }*/
+            if($('#pwd').val() && !isValidPassword($('#pwd').val())){
+                    $('#pswd_info').show();
+                    event.preventDefault();
+            }
+            function isValidPassword(pwd){
+                //alert("validating pwd");
+                 var passw=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+                //alert("passw:"+passw);
+                if(pwd.match(passw))
+                {
+                    //alert('Correct, try another...')
+                    return true;
+                }
+                else
+                {
+                    //alert('Wrong...!')
+                    return false;
+                }
+            }
+            //alert("validate email");
+            if($("#valid_email").is(":visible")){
+               event.preventDefault();
+            }
+    });
+});
+//]]>
+</script>
+
+<script>
+//<![CDATA[
+        $('#pin').keypress(function (e) {
+        $('#invalid_pin').hide();
+
+        var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        var keyCode = e.which ? e.which : e.keyCode;
+        var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        if(!ret)
+        {
+               e.preventDefault();
+               $('#invalid_pin').show();
+        }
+        return ret;
+
+        });
+
+//]]>
+$('#pin').focusout(function () {
+        $('#invalid_pin').hide();
+});
+</script>
+
+
+<script>
+        $(function(){
+			$(document.body).on('click', '.changeType' ,function(){
+				$(this).closest('.phone-input').find('.type-text').text($(this).text());
+				$(this).closest('.phone-input').find('.type-input').val($(this).data('type-value'));
+			});
+
+			$(document.body).on('click', '.btn-remove-phone' ,function(){
+				$(this).closest('.phone-input').remove();
+			});
+
+			$('.btn-add-phone').click(function(){
+				var index = $('.phone-input').length + 1;
+				$('.phone-list').append(''+
+						'<div class="input-group phone-input">'+
+							'<span class="input-group-btn">'+
+								'<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="type-text">Type</span> <span class="caret"></span></button>'+
+								'<ul class="dropdown-menu" role="menu">'+
+									'<li><a class="changeType" href="javascript:;" data-type-value="phone">Mobile</a></li>'+
+									'<li><a class="changeType" href="javascript:;" data-type-value="fax">Home</a></li>'+
+									'<li><a class="changeType" href="javascript:;" data-type-value="mobile">Work</a></li>'+
+								'</ul>'+
+							'</span>'+
+							'<input type="text" name="phone['+index+'][number]" class="form-control" placeholder="+91 (999) 999 9999" />'+
+							'<input type="hidden" name="phone['+index+'][type]" class="type-input" value="" />'+
+							'<span class="input-group-btn">'+
+								'<button class="btn btn-danger btn-remove-phone" type="button"><span class="glyphicon glyphicon-remove"></span></button>'+
+							'</span>'+
+						'</div>'
+				);
+			});
+		});
+
+</script>
+
+
+</body>
+</html>

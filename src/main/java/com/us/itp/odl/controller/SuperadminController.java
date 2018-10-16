@@ -33,6 +33,7 @@ public class SuperadminController {
             @RequestBody @NonNull @Valid final OfficeDto dto,
             @NonNull final BindingResult binding
     ) {
+        System.out.println("********"+dto.getCityCode());
         if (binding.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         officeService.saveOffice(dto.toOffice());
         return new ResponseEntity<>(HttpStatus.CREATED);

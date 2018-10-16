@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="../../assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css"/>
+    <!--<link rel="stylesheet" type="text/css"
+          href="../../assets/lib/material-design-icons/css/material-design-iconic-font.min.css"/>-->
+    <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css"
+          href="../../assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/lib/select2/css/select2.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../assets/lib/bootstrap-slider/css/bootstrap-slider.min.css"/>
+    <!--<link rel="stylesheet" href="../../assets/css/app.css" type="text/css"/>-->
+</head>
+<body>
+<div class="be-wrapper">
+    <nav class="navbar navbar-expand fixed-top be-top-header">
+        <div class="container-fluid">
+            <div class="navbar-brand"> <a class="navbar-brand" href="#"><img class="displayed" align="left"
+                                                                             src="../../assets/img/odl.png"
+                                                                             alt="logo"
+                                                                             height="40"
+                                                                             width="140"></a>
+            </div>
+            <div class="be-right-navbar">
+                <div class="nav navbar-nav navbar-right topnav-right">
+                    <ul class="nav navbar-nav float-right be-user-nav topnav-right">
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true">
+                            <img src="../../assets/img/profile.png" alt="Avatar"><span
+                                class="user-name">Gokul</span></a>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="user-info">
+                                    <div class="user-name">Gokul</div>
+                                    <div class="user-position online">Available</div>
+                                </div><a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Settings</a>
+                                <a class="dropdown-item" href="../login/login.html"><span class="icon mdi mdi-power"></span>Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="be-left-sidebar">
+        <div class="left-sidebar-wrapper"><a class="left-sidebar-toggle" href="#">MENU</a>
+            <div class="left-sidebar-spacer">
+                <div class="left-sidebar-scroll">
+                    <div class="left-sidebar-content">
+                        <ul class="sidebar-elements">
+                            <li><a href="../home/home.html"><i class="icon mdi mdi-home"></i><span>
+                                HOME</span></a>
+                            </li>
+                            <li class="parent"><a href="#"><i class="icon mdi mdi-city"></i><span>ODL OFFICE</span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="odloffice.html"><i
+                                            class="icon mdi mdi-border-color"></i><span>CREATE
+                                    </span></a>
+                                    </li>
+                                    <li><a href="mododloffice.html"><i
+                                            class="icon mdi mdi-format-list-bulleted"></i><span>LIST</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="parent"><a href="charts.html"><i class="icon mdi mdi-account"></i><span>ODL OFFICE ADMIN</span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="officeadmin.html"><i
+                                            class="icon mdi mdi-border-color"></i><span>CREATE
+                                    </span></a></li>
+                                    <li><a href="modofficeadmin.html"><i
+                                            class="icon mdi mdi-format-list-bulleted"></i><span>LIST</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="be-wrapper">
+        <div class="be-content">
+            <div class="main-content container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-border-color card-border-color-primary">
+                            <div class="card-header card-header-divider"> ODL OFFICE <span class="card-subtitle">Create a new ODL Office</span></div>
+                            <div class="card-body">
+                                    <form id="formid" th:action="@{/sa/odloffice}"
+                                th:object="${office}"
+                                      method="post">
+                                    <div class="form-group row">
+                                        <label
+                                                class="col-12 col-sm-3 col-form-label text-sm-right">*ODL OFFICE NAME</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" placeholder="Enter ODL Office Name">
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*ODL OFFICE CODE</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" data-parsley-maxlength="3" placeholder="Enter ODL Office Code">
+                                        </div>
+                                    </div>-->
+
+                                    <div class="form-group row">
+                                        <label
+                                                class="col-12 col-sm-3 col-form-label text-sm-right">*ADDRESS 1</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" placeholder="Enter Address 1">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">ADDRESS 2</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text"  data-parsley-maxlength="25" placeholder="Enter Address 2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*CITY</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" data-parsley-maxlength="25" placeholder="Enter City name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*CITY CODE</label>
+                                        <div class="col-12 col-sm-8 col-lg-6"><input class="form-control" type="text" required="" data-parsley-maxlength="3" placeholder="Enter ODL City Code">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*PINCODE</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" data-parsley-type="number" required="" data-parsley-length="[5,10]" placeholder="Enter Pincode">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*STATE</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" data-parsley-maxlength="25" placeholder="Enter State name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*COUNTRY</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="text" required="" data-parsley-maxlength="25" placeholder="Enter Country name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*PHONE NO</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" data-parsley-type="number" required="" type="text" data-parsley-maxlength="12" data-parsley-minlength="6" placeholder="Enter Phone no">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-3 col-form-label text-sm-right">*E-MAIL</label>
+                                        <div class="col-12 col-sm-8 col-lg-6">
+                                            <input class="form-control" type="email" required="" parsley-type="email" placeholder="Enter a valid e-mail">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row text-right">
+                                        <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                                            <button id=submitbutton class="btn btn-space
+                                                    btn-primary"
+                                                    type="submit"
+                                                    >Submit</button>
+                                            <button class="btn btn-space btn-secondary">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="../../assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="../../assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="../../assets/js/app.js" type="text/javascript"></script>
+    <script src="../../assets/lib/parsley/parsley.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      	//-initialize the javascript
+      	App.init();
+      	$('form').parsley();
+      });
+    </script>
+<script>
+    $('#submitbutton').on('click',function()
+    {
+     var formData = {
+'odlofficename'	: $('input[name=odlofficename]').val(),
+'address1' 		: $('input[name=address1]').val(),
+'address2' 		: $('input[name=address2]').val(),
+'City' 		: $('input[name=City]').val(),
+'Citycode' 		: $('input[name=Citycode]').val(),
+'pincode' 		: $('input[name=pincode]').val(),
+'state' 		: $('input[name=state]').val(),
+'country' 		: $('input[name=country]').val(),
+'phone no' 		: $('input[name=phone no]').val(),
+'email' 		: $('input[name=email]').val(),
+};
+
+// Stringify data into URL
+var data = "json=" + JSON.stringify({
+name:odlofficename,
+address1:address1,
+address2:address2,
+city:City,
+citycode:Citycode,
+pincode:pincode,
+state:state,
+country:country,
+phoneno:phoneno,
+email:email
+});
+
+var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
+
+// Open request
+xmlhttp.open("POST", "/echo/json/", true);
+<!--xmlhttp.setRequestHeader("Content-type", "application/json");-->
+
+// Send data
+xmlhttp.send(data);
+
+// Upon data coming back, parse and append.
+xmlhttp.onreadystatechange = () => {
+if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+var json = JSON.parse(xmlhttp.responseText);
+ajax_json.innerHTML = json.odlofficename;
+ajax_html.innerHTML = json.address1;
+ajax_html.innerHTML = json.address2;
+ajax_json.innerHTML = json.City;
+ajax_json.innerHTML = json.Citycode;
+ajax_json.innerHTML = json.pincode;
+ajax_json.innerHTML = json.state;
+ajax_json.innerHTML = json.country;
+ajax_json.innerHTML = json.phoneno;
+ajax_json.innerHTML = json.email;
+}
+};
+})
+
+
+
+</script>
+</body>
+</html>
